@@ -9,7 +9,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -34,20 +33,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             FilterChain filterChain)
             throws ServletException, IOException {
 
-        System.out.println("➡ FILTER HIT: " + request.getMethod() + " " + request.getServletPath());
+
 
         final String authHeader = request.getHeader("Authorization");
-        System.out.println("➡ AUTH HEADER: " + authHeader);
+
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            System.out.println(" NO BEARER TOKEN");
+
             filterChain.doFilter(request, response);
             return;
         }
 
         String jwt = authHeader.substring(7);
         String userEmail = jwtService.extractUsername(jwt);
-        System.out.println("➡ JWT USER: " + userEmail);
+
 
         if (userEmail != null &&
                 SecurityContextHolder.getContext().getAuthentication() == null) {
