@@ -9,5 +9,5 @@ public class SignupRequest {
     private String password;
     private String role;
 
-    // getters and setters
+
 }

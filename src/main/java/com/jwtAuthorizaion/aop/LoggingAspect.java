@@ -20,7 +20,7 @@ public class LoggingAspect {
     @Around("execution(* com.jwtAuthorizaion.controller..*(..))")
     public Object logController(ProceedingJoinPoint joinPoint) throws Throwable {
 
-        log.info("➡️  Controller: {} | Args: {}",
+        log.info("Controller: {} | Args: {}",
                 joinPoint.getSignature().toShortString(),
                 maskSensitiveData(joinPoint.getArgs()));
 
